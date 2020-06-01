@@ -1,12 +1,33 @@
-import React from 'react';
-import './App.css';
-import ChartWrapper from './01_Example/ChartWrapper';
+import React, { Component } from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+//import ChartWrapper from './02_Barchart/ChartWrapper';
+import ChartWrapper from './02_Barchart/ChartWrapper_HOOKS';
+import GenderDropdown from './02_Barchart/GenderDropdown';
 
-class App extends React.Component {
+class App extends Component {
+  state = {
+    gender: "men"
+  }
+
+  genderSelected = (gender) => this.setState({ gender })
+
   render() {
     return (
       <div className="App">
-        <ChartWrapper />
+        <Navbar bg="light">
+          <Navbar.Brand>Barchartly</Navbar.Brand>
+        </Navbar>
+        <Container>
+          <Row>
+            <Col xs={12}><GenderDropdown genderSelected={this.genderSelected} /></Col>
+          </Row>
+          <Row>
+            <Col xs={12}><ChartWrapper gender={this.state.gender} /></Col>
+          </Row>
+        </Container>
       </div>
     );
   }
